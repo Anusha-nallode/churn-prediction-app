@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Churn Prediction{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="text-center">Churn Prediction</h2>
+        <p class="text-center text-muted">Enter customer details to predict churn</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Enter Customer Data (comma-separated)</label>
+                <input type="text" name="customer_data" class="form-control" placeholder="e.g., 34, 12000, 3, 1, 0" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Predict</button>
+        </form>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} mt-3">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
